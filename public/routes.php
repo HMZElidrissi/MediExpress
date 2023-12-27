@@ -1,6 +1,7 @@
 <?php
 
 use Core\Router;
+use App\Controllers\HomeController;
 
 $router = new Router();
 
