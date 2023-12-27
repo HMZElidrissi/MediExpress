@@ -1,43 +1,36 @@
 <?php
 
 namespace Core;
+
 class Router
 {
-    protected $routes = [];
+    public $routes = [];
 
-    public function add($method, $uri, $controller)
+    public function add($method, $uri, $controller, $action)
     {
-        $this->routes[] = compact('method', 'uri', 'controller');
-        /*
-         * This is the same as:
-         * $this->routes[] = [
-            'uri' => $uri,
-            'controller' => $controller,
-            'method' => $method
-            ];
-        */
+        $this->routes[] = compact('method', 'uri', 'controller', 'action');
     }
 
-    public static function get($uri, $controller)
+    public function get($uri, $controller, $action)
     {
-        (new Router)->add('GET', $uri, $controller);
+        $this->add('GET', $uri, $controller, $action);
     }
 
-    public static function post($uri, $controller)
+    public function post($uri, $controller, $action)
     {
-        (new Router)->add('POST', $uri, $controller);
+        $this->add('POST', $uri, $controller, $action);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-                return $route['controller'];
-            } else {
-                http_response_code(404);
-                echo "404 Page Not Found";
+                return $route;
             }
         }
+        throw new \Exception('No route defined for this URI.');
     }
-
 }

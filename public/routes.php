@@ -1,9 +1,11 @@
 <?php
 
-/*use App\Models\Router;
-use App\Controllers\HomeController;
-use App\Controllers\UserController;
-use App\Controllers\ApplicationController;
-use App\Controllers\JobController;
+use Core\Router;
 
-Router::get('/', [HomeController::class, 'index']);*/
+$router = new Router();
+
+$router->get('/', HomeController::class, 'home');
+
+
+
+return $router;
