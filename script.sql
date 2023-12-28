@@ -26,13 +26,6 @@ CREATE TABLE medicaments (
      quantity_in_stock INT NOT NULL
 );
 
--- Create 'rapports' table
-CREATE TABLE reports (
-                         id INT AUTO_INCREMENT PRIMARY KEY,
-                         date DATETIME DEFAULT (CURRENT_DATE),
-                         report_type ENUM('vente', 'stock')
-);
-
 -- Create 'ventes' table
 CREATE TABLE sales (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,10 +34,8 @@ CREATE TABLE sales (
     medicament_id INT NOT NULL,
     quantity INT NOT NULL,
     sale_type ENUM('En Ligne', 'En Magasin') NOT NULL,
-    report_id INT NOT NULL,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
-    FOREIGN KEY (medicament_id) REFERENCES medicaments(id),
-    FOREIGN KEY (report_id) REFERENCES reports(id)
+    FOREIGN KEY (medicament_id) REFERENCES medicaments(id)
 );
 
 
@@ -65,15 +56,11 @@ INSERT INTO medicaments (name, description, price, quantity_in_stock) VALUES
 ('Amoxicillin', 'Antibiotic used to treat a number of bacterial infections', 8, 50),
 ('Cetirizine', 'Antihistamine used to treat allergies', 3, 75);
 
--- Insert data into 'rapports' table
-INSERT INTO reports (report_type) VALUES
-('vente'),
-('stock');
 
 -- Insert data into 'ventes' table (assuming reports have been created)
-INSERT INTO sales (patient_id, medicament_id, quantity, sale_type, report_id) VALUES
-(1, 1, 2, 'En Ligne', 1),
-(3, 2, 1, 'En Magasin', 1);
+INSERT INTO sales (patient_id, medicament_id, quantity, sale_type) VALUES
+(1, 1, 2, 'En Ligne'),
+(3, 2, 1, 'En Magasin');
 
 
 /*
