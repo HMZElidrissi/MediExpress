@@ -142,4 +142,9 @@ class Database
         return $this->statement->rowCount();
     }
 
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
 }
