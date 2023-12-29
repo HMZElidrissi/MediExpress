@@ -12,13 +12,13 @@ class AuthentificationController{
         
     }
 
-    public function singIn(){
+    public function login(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             extract($_POST);
             $login = $this->PatientEnLigne->login($email, $password);
             // print_r($login);
             // die();
-            if (isset($login) && password_verify($password, $login->password)) {
+            if ($login) {
                 
                 $_SESSION['id'] = $login->id;
                 $_SESSION['username'] = $login->username;
@@ -33,10 +33,11 @@ class AuthentificationController{
         }
     }
 
-    public function singUp(){
-        extract($_POST);
-        $this->data = ['username' => $username, 'email' => $email, 'password' => $password, 'cpassword' => $cpassword, 'user_type' => 'patient'];
+    public function register(){
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+            extract($_POST);
+            $this->data = ['username' => $username, 'email' => $email, 'password' => $password, 'cpassword' => $cpassword, 'user_type' => 'patient'];
             if ($this->PatientEnLigne->login($email, $password)) {
                 $_SESSION['error'] = "this email is already existed";
             }else {
@@ -51,5 +52,3 @@ class AuthentificationController{
         }
     }
 }
-$auth = new AuthentificationController();
-$auth->singIn();

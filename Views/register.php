@@ -23,7 +23,7 @@
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Create an Account!</h4>
                         </div>
-                        <form class="user" method = "POST" action = "Authentification">
+                        <form class="user" method = "POST" action = "/register">
                             <div class="mb-3">
                                 <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="User Name" name="username">
                             </div>
