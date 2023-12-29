@@ -7,14 +7,7 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    user_type ENUM('admin', 'patient') NOT NULL
-);
-
-CREATE TABLE patients (
-    patient_id INT NOT NULL,
-    patient_type ENUM('En Ligne', 'En Magasin') NOT NULL,
-    FOREIGN KEY (patient_id) REFERENCES users(id),
-    PRIMARY KEY (patient_id)
+    user_type ENUM('Admin', 'Patient En Ligne', 'Patient En Magasin') NOT NULL
 );
 
 -- Create 'medicaments' table
@@ -34,21 +27,16 @@ CREATE TABLE sales (
     medicament_id INT NOT NULL,
     quantity INT NOT NULL,
     sale_type ENUM('En Ligne', 'En Magasin') NOT NULL,
-    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (patient_id) REFERENCES users(id),
     FOREIGN KEY (medicament_id) REFERENCES medicaments(id)
 );
 
 
--- Insert data into 'users' table
+/*-- Insert data into 'users' table
 INSERT INTO users (username, email, password, user_type) VALUES
-('JohnDoe', 'johndoe@example.com', 'pass123', 'patient'),
-('JaneSmith', 'janesmith@example.com', 'pass123', 'admin'),
-('EmmaBrown', 'emmabrown@example.com', 'pass123', 'patient');
-
--- Insert data into 'patients' table
-INSERT INTO patients (patient_id, patient_type) VALUES
-(1, 'En Ligne'),
-(3, 'En Magasin');
+('JohnDoe', 'johndoe@example.com', 'pass123', 'Patient En Ligne'),
+('JaneSmith', 'janesmith@example.com', 'pass123', 'Admin'),
+('EmmaBrown', 'emmabrown@example.com', 'pass123', 'Patient En Magasin');
 
 -- Insert data into 'medicaments' table
 INSERT INTO medicaments (name, description, price, quantity_in_stock) VALUES
@@ -60,7 +48,7 @@ INSERT INTO medicaments (name, description, price, quantity_in_stock) VALUES
 -- Insert data into 'ventes' table (assuming reports have been created)
 INSERT INTO sales (patient_id, medicament_id, quantity, sale_type) VALUES
 (1, 1, 2, 'En Ligne'),
-(3, 2, 1, 'En Magasin');
+(3, 2, 1, 'En Magasin');*/
 
 
 /*
