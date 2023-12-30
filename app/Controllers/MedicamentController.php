@@ -12,6 +12,7 @@ public function __construct()
 public function D_medicament()
 {
     $d_medicament = $this->medicament->display_medicaments();
+    $_SESSION['medicament'] = $d_medicament;
     require(__DIR__ .'../../../views/medicament_table.php');
 }
 public function A_medicament()
