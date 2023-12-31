@@ -9,8 +9,9 @@ $router = new Router();
 $router->get('/', HomeController::class, 'home');
 $router->get('/login', HomeController::class, 'login');
 $router->get('/register', HomeController::class, 'register');
-$router->post('/login', AuthentificationController::class, 'login');
-$router->post('/register', AuthentificationController::class, 'register');
+$router->get('/logout', AuthentificationController::class, 'logout');
+$router->post('/login', AuthentificationController::class, 'singIn');
+$router->post('/register', AuthentificationController::class, 'singUp');
 
 
 

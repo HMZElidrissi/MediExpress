@@ -17,8 +17,7 @@ class PatientEnLigne extends Patient implements Authenticatable
         $this->db->bind(':username', $data['username']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':password', password_hash($data['password'], PASSWORD_DEFAULT));
-        $this->db->bind(':user_type', "Patient");
-
+        $this->db->bind(':user_type', "Patient En Ligne");
         return $this->db->execute();
     }
 
@@ -28,10 +27,6 @@ class PatientEnLigne extends Patient implements Authenticatable
         $this->db->bind(':email', $email);
         $this->db->execute();
         $row = $this->db->fetchSingleRecord();
-
-        if ($row && password_verify($password, $row->password)) {
-            return $row;
-        }
-        return false;
+        return $row;
     }
 }

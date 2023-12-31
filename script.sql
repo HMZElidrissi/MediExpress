@@ -12,11 +12,11 @@ CREATE TABLE users (
 
 -- Create 'medicaments' table
 CREATE TABLE medicaments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price INT NOT NULL,
-    quantity_in_stock INT NOT NULL
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     name VARCHAR(255) NOT NULL,
+     description TEXT,
+     price INT NOT NULL,
+     quantity_in_stock INT NOT NULL
 );
 
 -- Create 'ventes' table

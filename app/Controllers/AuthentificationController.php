@@ -12,14 +12,10 @@ class AuthentificationController{
         
     }
 
-    public function login(){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    public function singIn(){
             extract($_POST);
             $login = $this->PatientEnLigne->login($email, $password);
-            // print_r($login);
-            // die();
-            if ($login) {
-                
+            if ($login && password_verify($password, $login->password)) {
                 $_SESSION['id'] = $login->id;
                 $_SESSION['username'] = $login->username;
                 $_SESSION['role'] = $login->user_type;
@@ -30,25 +26,31 @@ class AuthentificationController{
                 $_SESSION['error'] = "Your email or password is incorrect";
                 header('location: /login');
             }
-        }
+        
     }
 
-    public function register(){
-        
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
-            extract($_POST);
-            $this->data = ['username' => $username, 'email' => $email, 'password' => $password, 'cpassword' => $cpassword, 'user_type' => 'patient'];
-            if ($this->PatientEnLigne->login($email, $password)) {
-                $_SESSION['error'] = "this email is already existed";
-            }else {
-                if ($password == $cpassword) {
-                    $this->PatientEnLigne->register($this->data);
-                    header('location: /login');
-                }else{
-                    $_SESSION['error'] = "The passwords you entered don't match";
-                    header('location: /register');
-                }
+    public function singUp(){
+        extract($_POST);
+        $this->data = ['username' => $username, 'email' => $email, 'password' => $password, 'cpassword' => $cpassword];
+        $login = $this->PatientEnLigne->login($this->data['email'], $this->data['password']);
+
+        if ($login) {
+            $_SESSION['error'] = "this email is already existed";
+            header('location: /register');
+        }else {
+            if ($password == $cpassword) {
+                $this->PatientEnLigne->register($this->data);
+                header('location: /login');
+            }else{
+                $_SESSION['error'] = "The passwords you entered don't match";
+                header('location: /register');
             }
         }
+        
+    }
+
+    public function logout(){
+        session_destroy();
+        header('Location: /login');
     }
 }
