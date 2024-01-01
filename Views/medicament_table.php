@@ -25,10 +25,15 @@
                         <div class="card-body">
                             
                             <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+                            <div class="class d-flex">
                                 <!-- Button trigger modal -->
-                <button type="button" class="btn align-items-start sidebar-dark accordion bg-gradient-success p-2 text-light navbar-dark mb-4" data-toggle="modal" data-target="#exampleModalCenter">
-                ajouter nouvelle médicament
-                </button>
+                                <button type="button" class="btn align-items-start sidebar-dark accordion bg-gradient-success p-2 text-light navbar-dark mb-4" data-toggle="modal" data-target="#exampleModalCenter">
+                                ajouter nouvelle médicament
+                                </button>
+                                <form action="export_pdf" method="POST" target="_blank">
+                                    <input type="submit" name="export_med" class="btn btn-outline-danger mx-4" value="Export PDF">
+                                </form>
+                            </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

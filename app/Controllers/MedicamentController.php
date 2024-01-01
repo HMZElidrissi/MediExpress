@@ -1,13 +1,19 @@
 <?php
 namespace App\Controllers;
 use App\Models\Medicament;
+use App\Controllers\ExportPDF;
+use App\Controllers\htmlPDF;
 class MedicamentController
 {
 public $medicament;
+public $PDF;
+public $htmlpdf;
 
 public function __construct()
 {
     $this->medicament = new Medicament();
+    $this->PDF = new ExportPDF();
+    $this->htmlpdf = new htmlPDF();
 }
 public function D_medicament()
 {
@@ -49,6 +55,21 @@ public function delete_medicament()
         {
             header('location: medicament_table');
         }
+    }
+}
+public function export_pdf()
+{
+    if(isset($_POST['export_med']))
+    {
+
+        $countMed = $this->medicament->CountAll();
+        // echo "<pre>";
+        // print_r($countMed);
+        // echo "</pre>";
+        // die();
+        $All_medicament = $this->medicament->display_medicaments();
+        $html = $this->htmlpdf->html_pdf($All_medicament , $countMed);
+       $result = $this->PDF->export_medicament($html);
     }
 }
 }

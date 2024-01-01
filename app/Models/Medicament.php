@@ -52,4 +52,13 @@ class Medicament{
         $this->db->bind(':medicament_id' , $medicament_id);
         return $stmt->execute();
     }
+    public function CountAll()
+    {
+        $sql = "SELECT COUNT(*) as total_medicaments FROM medicaments";
+        $stmt = $this->db->query($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchSingleRecord();
+       return $total = $result->total_medicaments;
+    }
 }
