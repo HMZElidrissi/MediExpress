@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Core\Database;
+use App\Models\User;
+
 
 class PatientEnLigne extends Patient implements Authenticatable
 {
@@ -45,5 +47,10 @@ class PatientEnLigne extends Patient implements Authenticatable
             return $row;
         }
         return false;
+    }
+    public function getPatientsEnLigne()
+    {
+        $this->db->query("SELECT * FROM users WHERE user_type = 'Patient' AND id IN (SELECT patient_id FROM patients WHERE patient_type = 'En Ligne')");
+        return $this->db->fetchAllRecords();
     }
 }

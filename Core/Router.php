@@ -9,6 +9,7 @@ class Router
     public function add($method, $uri, $controller, $action)
     {
         $this->routes[] = compact('method', 'uri', 'controller', 'action');
+        var_dump($this->routes);
     }
 
     public function get($uri, $controller, $action)

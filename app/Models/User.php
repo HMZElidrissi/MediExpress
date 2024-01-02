@@ -24,4 +24,5 @@ abstract class User
         $this->db->query("SELECT * FROM users");
         return $this->db->fetchAllRecords();
     }
+    
 }

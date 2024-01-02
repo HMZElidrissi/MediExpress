@@ -7,6 +7,7 @@ class HomeController extends Controller
 {
     public function home()
     {
+        $user=new user();
         $this->render('home');
     }
 }
