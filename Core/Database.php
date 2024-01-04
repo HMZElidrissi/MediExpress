@@ -147,4 +147,19 @@ class Database
         return $this->pdo->lastInsertId();
     }
 
+    /**
+     * Prevent instance from being serialized.
+     */
+    protected function __sleep() { }
+
+    /**
+     * Prevent instance from being cloned.
+     */
+    private function __clone() { }
+
+    /**
+     * Prevent instance from being unserialized.
+     */
+    private function __wakeup() { }
+
 }
