@@ -14,4 +14,8 @@ class MedicamentController extends Controller {
         $results = $this->MedicamentModel->display_medicaments();
         $this->render('medicaments', ['results' => $results]);
     }
+    public function updateMedicaments(){
+        $results = $this->MedicamentModel->display_medicaments();
+        $this->render('medicaments', ['results' => $results]);
+    }
 }
