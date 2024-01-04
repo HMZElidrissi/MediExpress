@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    
 </head>
 
 <body id="page-top">
@@ -29,7 +30,6 @@
                 <button type="button" class="btn align-items-start sidebar-dark accordion bg-gradient-success p-2 text-light navbar-dark mb-4" data-toggle="modal" data-target="#exampleModalCenter">
                 ajouter nouvelle médicament
                 </button>
-
                 <!-- Modal -->
                 
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -45,6 +45,11 @@
                                                         <form action="add_vent" method="POST">
                                                            
                                                             <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label for="Patient">Name Patient:</label>
+                                                                <input type="text" class="form-control" id="Patient" name="name" placeholder="Name Patient"
+                                                                required>
+                                                            </div>
                                                                 <label for="namemed">medicament Name:</label>
 
                                                                 <select class="form-select select" aria-label="Default select example" name="Namemed" id="">
@@ -63,14 +68,16 @@
 
                                                             <div class="form-group">
                                                                 <label for="jobLocation">Quantity:</label>
-                                                                <input type="number" class="form-control" id="medQuantity" name="quantity"
+                                                                <input type="number" class="form-control" id="medQuantity" name="quantity" max="1" min="1" 
                                                                 required>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <label for="jobCompany">Sale type:</label>
                                                                 <input type="date" class="form-control" id="date" name="date" placeholder="dd/mm/yyyy"
                                                                     required>
                                                             </div>
+
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Close</button>
@@ -85,6 +92,7 @@
                 <table class="table mt-4" id="dataTable">
                     <thead>
                                     <tr>			
+                                        <th class="text-center">Name Patient</th>
                                         <th class="text-center">Name Medicament</th>
                                         <th class="text-center">Quantity</th>
                                         <th class="text-center">Price</th>
@@ -96,19 +104,38 @@
                                 <tbody>
                                     <?php foreach ($d_vent as $rows) { ?>
                                         <tr>
-                                            <td class="text-center"><?= $rows->name ?></td>
-                                            <td class="text-center"><?= $rows->quantity ?></td>
-                                            <td class="text-center"><?= $rows->price ?></td>
-                                            <td class="text-center"><?= $rows->sale_type ?></td>
-                                            <td class="text-center"><?= $rows->date ?></td>
+
+                                            <td class="text-center info"><?= $rows->username ?></td>
+                                            <td class="text-center info"><?= $rows->name ?></td>
+                                            <td class="text-center info"><?= $rows->quantity ?></td>
+                                            <td class="text-center info"><?= $rows->price ?></td>
+                                            <td class="text-center info"><?= $rows->sale_type ?></td>
+                                            <td class="text-center info"><?= $rows->date ?></td>
                                             <td class="text-center">
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_edit_<?= $rows->id ?>">
-                                                  <i class="fas fa-edit text-light"></i>
-                                            </button>
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-success px-2" data-toggle="modal" data-target="#modal_edit_<?= $rows->id ?>">
+                                                          <i class="fas fa-edit text-light"></i>
+                                                    </button>
+                                                    <form action="vente_pdf" method = "POST" target="_blank" >
+                                                        <input type="hidden" name="id_vente" value="<?= $rows->id_vente?>">
+                                                        <input type="hidden" name="username" value="<?= $rows->username ?>">
+                                                        <input type="hidden" name="name" value="<?= $rows->name ?>">
+                                                        <input type="hidden" name="quantity" value="<?= $rows->quantity ?>">
+                                                        <input type="hidden" name="price" value="<?= $rows->price ?>">
+                                                        <input type="hidden" name="sale_type" value="<?= $rows->sale_type ?>">
+                                                        <input type="hidden" name="date" value="<?= $rows->date ?>">
+        
+                                                        <button type="submit" name="export_vente" class="btn btn-primary ms-2 px-2">
+                                                            <i class="fas fa-file-export text-light"></i> Boon
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+                                           
+
                                             </td>
                                         </tr>            
                                 </tbody>
-                            
                 <!-- ========================== modal edit vent ================================== -->
                 <div class="modal fade" id="modal_edit_<?= $rows->id ?>" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -139,12 +166,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="jobLocation">Quantity:</label>
-                                        <input type="number" class="form-control" value="<?= $rows->quantity?>" id="medQuantity" name="quantity"
+                                        <input type="number" class="form-control" value="<?= $rows->quantity?>" id="medQuantity" name="quantity" max="1" min="1"
                                             required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="jobCompany">Sale type:</label>
-                                        <input type="date" class="form-control" id="date" name="date" placeholder="dd/mm/yyyy"
+                                        <label for="jobCompany">Date Vente:</label>
+                                        <input type="date" class="form-control" value="<?= $rows->date?> id="date" name="date" placeholder="mm/dd/yyyy"
                                             required>
                                     </div>
                                     <div class="modal-footer">
@@ -169,17 +196,20 @@
             <?php include("partials/_footer.php"); ?>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-                crossorigin="anonymous">
-            </script>
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
+   
+   <script>
+   
+        
+          
+</script>
     
 </body>
 

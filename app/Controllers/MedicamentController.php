@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\Medicament;
 use App\Controllers\ExportPDF;
 use App\Controllers\htmlPDF;
+
 class MedicamentController
 {
 public $medicament;
@@ -19,6 +20,7 @@ public function D_medicament()
 {
     $d_medicament = $this->medicament->display_medicaments();
     $_SESSION['medicament'] = $d_medicament;
+    
     require(__DIR__ .'../../../views/medicament_table.php');
 }
 public function A_medicament()

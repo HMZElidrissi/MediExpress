@@ -31,7 +31,10 @@
                                 ajouter nouvelle médicament
                                 </button>
                                 <form action="export_pdf" method="POST" target="_blank">
-                                    <input type="submit" name="export_med" class="btn btn-outline-danger mx-4" value="Export PDF">
+                                    <button type="submit" name="export_med" class="btn btn-outline-danger mx-4">
+                                    <i class="fas fa-file-export  text-darck"></i> Export PDF
+                                    </button>
+                                    
                                 </form>
                             </div>
 

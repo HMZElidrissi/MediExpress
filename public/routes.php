@@ -17,8 +17,6 @@ $router->get('/VenteEnlingne', VenteController::class, 'Display_VentEnligne');
 $router->get('/VenteEnmagasin', VenteController::class, 'display_ventEnmagasin');
 $router->post('/add_vent', VenteController::class, 'Add_Vent');
 $router->post('/update_vente', VenteController::class, 'update_vente');
-
-
-
+$router->post('/vente_pdf', VenteController::class, 'export_pdf');
 
 return $router;
