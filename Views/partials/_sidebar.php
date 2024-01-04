@@ -10,7 +10,7 @@
             <li class="nav-item"><a class="nav-link" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
             <li class="nav-item"><a class="nav-link" href="profile.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
             <li class="nav-item"><a class="nav-link" href="table.php"><i class="fas fa-table"></i><span>Table</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="patient.php"><i class="fas fa-table"></i><span>patient</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="patient"><i class="fas fa-table"></i><span>patient</span></a></li>
 
             <li class="nav-item"><a class="nav-link" href="login.php"><i class="far fa-user-circle"></i><span>Login</span></a></li>
             <li class="nav-item"><a class="nav-link" href="register.php"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
