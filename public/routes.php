@@ -8,8 +8,8 @@ use App\Controllers\VenteEnLigneController;
 
 $router = new Router();
 
-$router->get('/', HomeController::class, 'home');
-$router->get('/login', HomeController::class, 'login');
+$router->get('/', HomeController::class, 'login');
+$router->get('/dashboard', HomeController::class, 'dashboard');
 $router->get('/register', HomeController::class, 'register');
 $router->get('/medicaments', MedicamentController::class, 'displayMedicaments');
 $router->get('/logout', AuthentificationController::class, 'logout');
