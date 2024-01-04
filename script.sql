@@ -31,7 +31,6 @@ CREATE TABLE sales (
     FOREIGN KEY (medicament_id) REFERENCES medicaments(id)
 );
 
-
 /*-- Insert data into 'users' table
 INSERT INTO users (username, email, password, user_type) VALUES
 ('JohnDoe', 'johndoe@example.com', 'pass123', 'Patient En Ligne'),
