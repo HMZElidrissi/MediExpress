@@ -17,10 +17,10 @@
             <div id="content">
                 <?php include("partials/_navbar.php"); ?>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Team</h3>
+                    <h3 class="text-dark mb-4">Medicaments</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-success m-0 fw-bold">Employee Info</p>
+                            <p class="text-success m-0 fw-bold">Medicaments Info</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -43,7 +43,7 @@
                                             <th>Medicament Name</th>
                                             <th>Description</th>
                                             <th>Price</th>
-                                            <th>Buy</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <?php foreach($results as $result){ ?>
@@ -52,10 +52,38 @@
                                             <td><?= $result->name?></td>
                                             <td><?= $result->description?></td>
                                             <td>$<?= $result->price?></td>
-                                            <td><button class = "  btn btn-primary btn-md">Buy</button></td>
+                                            <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Buy</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Medicament</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/buy" method = "POST">
+                                                            <label for="recipient-name" class="col-form-label">Medicament Name:</label>
+                                                            <input type="text" class="form-control" id="recipient-name" value = "<?= $result->name?>">
+                                                            <label for="recipient-name" class="col-form-label">Quantite:</label>
+                                                            <input type="number" name = "quantite" class="form-control" id="recipient-name" min = 1>
+                                                            <input type="hidden" name = "medicamentId" class="form-control" id="recipient-name" value = "<?= $result->id ?>">
+                                                        
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Buy</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </td>
                                         </tr>
+                                    <tbody>
+                                    <?php }?>
                                 </table>
-                                <?php }?>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
@@ -80,6 +108,9 @@
             <?php include("partials/_footer.php"); ?>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    
+
+
     <script src="assets/js/script.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>

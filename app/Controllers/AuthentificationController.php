@@ -19,12 +19,10 @@ class AuthentificationController{
                 $_SESSION['id'] = $login->id;
                 $_SESSION['username'] = $login->username;
                 $_SESSION['role'] = $login->user_type;
-                if ($_SESSION['role'] == 'admin') {
-                    header('location: /');
-                }else header('location: /');
+                header('location: /dashboard');
             }else {
                 $_SESSION['error'] = "Your email or password is incorrect";
-                header('location: /login');
+                header('location: /');
             }
         
     }
@@ -40,7 +38,7 @@ class AuthentificationController{
         }else {
             if ($password == $cpassword) {
                 $this->PatientEnLigne->register($this->data);
-                header('location: /login');
+                header('location: /');
             }else{
                 $_SESSION['error'] = "The passwords you entered don't match";
                 header('location: /register');
@@ -51,6 +49,6 @@ class AuthentificationController{
 
     public function logout(){
         session_destroy();
-        header('Location: /login');
+        header('Location: /');
     }
 }

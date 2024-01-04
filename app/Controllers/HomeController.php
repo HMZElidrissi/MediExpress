@@ -5,8 +5,12 @@ use App\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function dashboard()
     {
+        session_start();
+        if (!isset($_SESSION['id'])) {
+            header('Location: /');
+        }
         $this->render('home');
     }
     public function login()
